@@ -32,7 +32,15 @@ On the Agents tab, click on an agent to interact with it. The console that you p
 Faction agents are extensible through modules that provide additional commands. To load a module, use the `load [module name]` command.  
 
 ## Uploading Files
+You can upload files on the "Files" tab, this is also where files that you upload from agents will show up.
+
+You can reference a file in a command with `f2:files/[filename]`. The API will automatically replace this string with the base64 encoded byte array of the given file. Commands like `download` will leverage this behavior to write files to disk.
 
 ## Creating Users
+Administrators can create new users for Faction from the settings page, located in the dropdown menu under your account name in the upper right. Users can have one of three different roles:
+
+* Administrator: Allows for the creation of new users
+* Operator: Allows for everything except the creation of users
+* ReadOnly: Read only access to Faction.
 
 ## Generating API Keys

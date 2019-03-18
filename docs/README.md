@@ -33,7 +33,7 @@ cd install
 sudo bash ./install.sh
 ```
 
-Once the install has finished, you'll be able to use the `faction` command to interact with your Faction install. The first thing you're going to want to do is run `sudo faction setup`. This command provides plenty of configuration options (including some that are totally unsupported), some of the relevant options are covered here. More details about the Faction CLI can be found here.
+Once the install has finished, you'll be able to use the `faction` command to interact with your Faction install. The first thing you're going to want to do is run `sudo faction setup`. This command provides plenty of configuration options (including some that are totally unsupported), some of the relevant options are covered here. More details about the Faction CLI can be found [here](/docs/components/#CLI).
 
 |Parameter          | Description |
 |-------------------|-------------|
