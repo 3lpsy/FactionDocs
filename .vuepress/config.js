@@ -4,7 +4,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: 'Documentation', link: '/docs/' },
-      { text: 'Marauder Shell', link: 'https://www.maraudershell.com'},
+      { text: 'Marauder Shell', link: 'https://github.com/maraudershell/Marauder'},
       { text: 'Github', link: 'https://github.com/factionc2/'}
     ],
     sidebar: [
@@ -16,6 +16,12 @@ module.exports = {
       '/docs/components/',
     ],
     sidebarDepth: 2,
-    lastUpdated: 'Last Updated'
+    lastUpdated: 'Last Updated',
+    // if your docs are in a different repo from your main project:
+    docsRepo: 'FactionC2/Docs',
+    // if your docs are in a specific branch (defaults to 'master'):
+    docsBranch: 'master',
+    // defaults to false, set to true to enable
+    editLinks: true
   }
 }

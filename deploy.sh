@@ -4,13 +4,13 @@
 set -e
 
 # build
-npm run docs:build
+npm run build
 
 # navigate into the build output directory
-cd docs/.vuepress/dist
+cd .vuepress/dist
 
 # if you are deploying to a custom domain
-echo 'www.factionc2.com' > CNAME
+#echo 'www.factionc2.com' > CNAME
 
 git init
 git add -A
