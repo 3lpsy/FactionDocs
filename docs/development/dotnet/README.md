@@ -1,9 +1,9 @@
 # .NET Faction Language Standard
-.NET modules leverage the [Faction.Modules.Dotnet.Common]() library to help make developing easier. This library provides objects to inhereit and edit for your needs.
+.NET modules leverage the [Faction.Modules.Dotnet.Common](https://github.com/FactionC2/Faction.Modules.Dotnet.Common) library to help make developing easier. This library provides objects to inhereit and edit for your needs.
 
-## Implementation Notes
-* Modules main entry point should be a part of the `Faction.Modules.Dotnet` namespace
-* Modules must implement a `GetCommands` or `GetTransports` method in the `Faction.Modules.Dotnet` namespace that returns a list of Command or Transport objects.
+Some general notes on building a Faction .NET module:
+* Modules main entry point should be in the `Faction.Modules.Dotnet` namespace
+* Modules must implement either a `GetCommands` or `GetTransports` method in the `Faction.Modules.Dotnet` namespace that returns a list of Command or Transport objects.
 
 ## Commands
 .NET commands inhiert from the "Command" object. When a command is executed, it leverages the 'Execute' method of its command object. The 'Execute' command is passed a `Dictionary<string, string>` of parameters for the command. Details are how to register parameters are covered later in this document.
@@ -19,7 +19,7 @@ The 'Execute' method of the command object is expected to return a 'CommandOutpu
 
 ### Implementation Notes
 * Commands must be in the `Faction.Modules.Dotnet.Commands` namespace
-* The FactionModule.dotnet.json file that is used to register modules with Faction accepts both a 'BuildCommand' and 'BuildLocation' field. The BuildCommand is run on the Faction build server and is used to build the module. The BuildLocation parameter is used to tell faction where to find the finished module after its build with the BuildCommand. 
+ 
 
 ### Examples
 
@@ -236,7 +236,11 @@ To register a command, create a "FactionModule.dotnet.json" file in the root of 
 }
 ```
 
+### Implementation Notes
+* The BuildCommand is run on the Faction build server and is used to build the module. This is only required if your module should be rebuilt each time its loaded.
+* The BuildLocation parameter is used to tell faction where to find the module. If you specifiy a build command, the resulting file should end up at this location.
+* A more complete FactionModule.dotnet.json file, demonstrating more options that are available within the file can be found [here](https://github.com/FactionC2/Modules-Dotnet/blob/master/StandardLibrary/FactionModule.dotnet.json).
 
-place the directory containing your module files in '/opt/faction/modules/dotnet/'
 
-## Transports
+## Installing a Module
+The Faction .NET Build Server will scan subfolders in `/opt/faction/modules/dotnet/` for files named `FactionModule.dotnet.json`. To install your module, simply create a new folder under this directory and make sure that your JSON file along with any other build files are in this new directory.

@@ -1,6 +1,15 @@
 ## What is Faction
 Faction is a C2 framework for security professionals, providing an easy way to extend and interact with agents. It focuses on providing an easy, stable, and approachable platform for C2 communications through well documented REST and Socket.IO APIs.
 
+### What makes Faction special
+Faction was developed with a heavy focus on modularity, allowing it to be flexible enough to server a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
+
+1. While the Faction team has released a [.NET agent](https://www.maraudershell.com) for Faction, is not *THE* Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
+
+2. You can create an entirely stand alone agent with all its functionality baked in, but agents greatly benefit when they can load Faction modules. These modules are stand alone libraries or code that bring new commands and features to an agent. An important aspect of Faction modules is that they are designed to be language specific, not agent specific. For example, any agent that can load the .NET runtime can leverage Faction's .NET modules.
+
+3. In most engagements, you're not going to have your agents connecting back directly to your C2. Faction was designed with redirects in mind in the form of Transport Servers. Transport Servers sit between Faction and your agent and handle masking your communications, and since Faction is all API based, these servers can be written in whatever language you're most comfortable in. 
+
 
 ## How Faction Works
 Instead of one large monolithic application, Faction is designed loosely around a micro services architecture. Functionality is split into seperate services that communicate through message queues. This approach provides several advantages, most important of which is allowing users to quickly be able to learn how the system operates. 
@@ -16,19 +25,19 @@ In addition to these services, Faction also relies on RabbitMQ for communication
 
 ## Installing Faction
 ::: warning
-The Faction install script currently only supports Ubuntu 18.04
+The Faction install script has only been tested Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything.
 :::
 
 The easiest way to install Faction is with:
 
 ```
-curl https://github.com/factionc2/install/install.sh | sudo bash
+curl https://github.com/FactionC2/Faction/install.sh | sudo bash
 ```
 
 If you're (understandably) concerned about piping a shell script from the internet into bash, you can instead clone the install repo and run it locally
 
 ```
-git clone https://github.com/factionc2/install/
+git clone https://github.com/FactionC2/Faction/
 cd install
 sudo bash ./install.sh
 ```
@@ -43,4 +52,4 @@ Once the install has finished, you'll be able to use the `faction` command to in
 ## Next Steps
 Once your install has finished, you can log into Faction at address displayed at the end of installation (Default is https://[external ip address]) using the username and password provided.
 
-Further details on using Faction can be found in the [Operation](/docs/operation/) section.
+Further details on using Faction can be found in the [Using Faction](/docs/using/) section.

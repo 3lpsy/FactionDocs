@@ -9,9 +9,11 @@ module.exports = {
     ],
     sidebar: [
       ['/docs/', 'Documentation'],
-      '/docs/components/',
+      '/docs/using/',
       '/docs/development/',
-      '/docs/operation/',
+      '/docs/agents/',
+      '/docs/api/',
+      '/docs/components/',
     ],
     sidebarDepth: 2,
     lastUpdated: 'Last Updated'

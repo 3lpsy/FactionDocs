@@ -12,7 +12,7 @@ No matter the API you're using you'll need an API key to authenticate. API keys 
 ### Logging in with a username and password to get an API key.
 You can post your username and password to /api/v1/login/ to get a session token API key. Its important to note that this key will be invalidated the next time your username and password is used against this endpoint.
 
-::: info
+::: 
 The login endpoint is the only endpoint in Faction that will accept a username and password for authentication. All other endpoints need to use an API key.
 :::
 
@@ -49,7 +49,7 @@ curl -X POST http://127.0.0.1:5000/api/v1/user/2/apikeys/?token=API_KEY_ID:API_S
 # Endpoints
 It is assumed that all endpoints listed here begin with `/api/v1/`
 
-::: info
+::: tip
 All parameters names are Case Sensitive
 :::
 
@@ -76,7 +76,7 @@ Hides the given agent
 ## Agent Checkin
 This endpoint is used by Transports and Agents when they check in. It handles returning encrypted tasks for agents and recieveing encrypted task results from agents.
 
-## GET /agent/[agent_name]/checkin/
+### GET /agent/[agent_name]/checkin/
 Returns a JSON string containing the agent name and a base64 encoded list of [Agent Task Messages]
 
 ## Task
@@ -86,33 +86,16 @@ Returns a list of all agent tasks
 ### GET /task/[task_id]/
 Returns the given task
 
-### 
-AgentEndpoint, '/agent/','/agent/<int:agent_id>/')
-    api.add_resource(AgentCheckinEndpoint, '/agent/<string:agent_name>/checkin/')
-    api.add_resource(AgentTypeEndpoint, '/agent/type/', '/agent/type/<int:agent_type_id>/')
-    api.add_resource(ConsoleAgentEndpoint, '/agent/<int:agent_id>/console/')
+## Console Message
+### GET /agent/[agent_id]/console/
+Returns a lists of all console messages associated with this agent id
 
-    # User REST endpoints
-    api.add_resource(LoginEndpoint, '/login/')
-    api.add_resource(UserEndpoint, '/user/', '/user/<int:user_id>/')
-    api.add_resource(ChangePasswordEndpoint, '/user/<int:user_id>/password/')
-    api.add_resource(ApiKeyEndpoint, '/user/<int:user_id>/apikeys/', '/user/<int:user_id>/apikeys/<int:api_key_id>/')
-    api.add_resource(UserRoleEndpoint, '/user/role/', '/user/role/<int:user_role_id>/')
+### GET /agent/[agent_id]/console/[console_message_id]
+Returns the given console message
 
-    # Task REST endpoints
-    api.add_resource(AgentTaskEndpoint, '/task/', '/task/<int:agent_task_id>/')
-    api.add_resource(ConsoleTaskEndpoint, '/task/<int:agent_task_id>/console/')
+### POST /agent/[agent_id]/console/
+Send a new console message
 
-    # Faction FIle Endpoint
-    api.add_resource(FactionFileEndpoint, '/file/', '/file/<string:faction_file_name>')
-    api.add_resource(FactionFileDownloadEndpoint, '/file/<string:faction_file_name>/download/')
-    api.add_resource(FactionFileBytesEndpoint, '/file/<string:faction_file_name>/bytes/')
-
-
-    # Misc REST endpoints
-    api.add_resource(ErrorMessageEndpoint, '/errors/', '/errors/<int:error_message_id>')
-    api.add_resource(IOCEndpoint, '/ioc/', '/ioc/<int:ioc_id>/')
-    api.add_resource(PayloadEndpoint, '/payload/', '/payload/<int:staging_config_id>/')
-    api.add_resource(PayloadFileEndpoint, '/payload/<int:payload_id>/file/')
-    api.add_resource(StagingEndpoint, '/staging/', '/staging/<string:payload_name>/<string:staging_id>/')
-    api.add_resource(TransportEndpoint, '/transport/', '/transport/<int:transport_id>/')
+|Parameter  | Description                                    |
+|-----------|------------------------------------------------|
+|Content    | The console message to send                    |

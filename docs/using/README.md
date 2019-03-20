@@ -29,7 +29,9 @@ On the Agents tab, click on an agent to interact with it. The console that you p
 * `help`
 * `help [command name]`
 
-Faction agents are extensible through modules that provide additional commands. To load a module, use the `load [module name]` command.  
+Faction agents are extensible through modules that provide additional commands. To load a module, use the `load [module name]` command. 
+
+See the [Faction Agents](/docs/agents/) page for more details on agents.
 
 ## Uploading Files
 You can upload files on the "Files" tab, this is also where files that you upload from agents will show up.
@@ -42,5 +44,3 @@ Administrators can create new users for Faction from the settings page, located 
 * Administrator: Allows for the creation of new users
 * Operator: Allows for everything except the creation of users
 * ReadOnly: Read only access to Faction.
-
-## Generating API Keys
