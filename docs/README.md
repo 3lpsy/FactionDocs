@@ -4,7 +4,7 @@ Faction is a C2 framework for security professionals, providing an easy way to e
 <iframe style="margin: 0 auto; text-align: center" width="560" height="315" src="https://www.youtube-nocookie.com/embed/gETAhgBJabI" frameborder="0" allowfullscreen></iframe>
 
 ### What makes Faction special
-Faction was developed with a heavy focus on modularity, allowing it to be flexible enough to server a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
+Faction was developed with a heavy focus on modularity, allowing it to be flexible enough to serve a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
 
 1. While the Faction team has released a [.NET agent](https://www.maraudershell.com) for Faction, is not *THE* Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
 
@@ -27,7 +27,7 @@ In addition to these services, Faction also relies on RabbitMQ for communication
 
 ## Installing Faction
 ::: warning
-The Faction install script has only been tested Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything.
+The Faction install script has only been tested on Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything.
 :::
 
 The easiest way to install Faction is with:
@@ -52,6 +52,6 @@ Once the install has finished, you'll be able to use the `faction` command to in
 |--admin-password | By default, a random password will be generated for the Admin account. |
 
 ## Next Steps
-Once your install has finished, you can log into Faction at address displayed at the end of installation (Default is https://[external ip address]) using the username and password provided.
+Once your install has finished, you can log into Faction at the address displayed at the end of installation (Default is https://[external ip address]) using the username and password provided.
 
 Further details on using Faction can be found in the [Using Faction](/docs/using/) section.
