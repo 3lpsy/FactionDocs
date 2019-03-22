@@ -4,9 +4,9 @@ After installing Faction, you'll be presented with the URL, Admin Username, and 
 ## Transports
 The first thing you'll want to do is setup a transport. By default, Faction comes with one transport configured: DIRECT. This transport allows payloads to connect directly to Faction which is fine for testing, but not a great idea for an actual engagment.
 
-Navigate to the Transports tab and click "New Transport". Provide a description for the Transport and you'll be given a Transport ID, Access Key Name, and Access Key Secret. The transport you're configuration should provide documentation on what to do with this information. If you're using the HTTP Transport, you can find that information here.
+Navigate to the Transports tab and click "New Transport". Provide a description for the Transport and you'll be given a Transport ID, Access Key Name, and Access Key Secret. The transport you're configuring should provide documentation on what to do with this information so that it can register with Faction. If you're using the HTTP Transport, you can find that information [here](https://github.com/FactionC2/TransportHTTP).
 
-Once the Transport is configured, it will show up as an available Transport in Faction
+Once the Transport is registered, it will show up as an available Transport in Faction
 
 ## Payloads
 Payloads are run on targets to establish an Agent. They control the initial settings for an agent, such as beacon interval, jitter, transports, and expiration dates. Payloads use the same password to stage an agent, as part of the staging process an agent gets its own password for communications.
