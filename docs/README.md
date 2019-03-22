@@ -6,7 +6,7 @@ Faction is a C2 framework for security professionals, providing an easy way to e
 ### What makes Faction special
 Faction was developed with a heavy focus on modularity, allowing it to be flexible enough to serve a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
 
-1. While the Faction team has released a [.NET agent](https://www.maraudershell.com) for Faction, is not *THE* Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
+1. While the Faction team has released a [.NET agent](https://github.com/maraudershell/Marauder) for Faction, is not *THE* Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
 
 2. You can create an entirely stand alone agent with all its functionality baked in, but agents greatly benefit when they can load Faction modules. These modules are stand alone libraries or code that bring new commands and features to an agent. An important aspect of Faction modules is that they are designed to be language specific, not agent specific. For example, any agent that can load the .NET runtime can leverage Faction's .NET modules.
 
