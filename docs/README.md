@@ -40,7 +40,7 @@ If you're (understandably) concerned about piping a shell script from the intern
 
 ```
 git clone https://github.com/FactionC2/Faction/
-cd install
+cd Faction
 sudo bash ./install.sh
 ```
 
