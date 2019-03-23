@@ -33,7 +33,7 @@ The Faction install script has only been tested on Ubuntu 18.04.2. It might work
 The easiest way to install Faction is with:
 
 ```
-curl https://github.com/FactionC2/Faction/install.sh | sudo bash
+curl https://raw.githubusercontent.com/FactionC2/Faction/master/install.sh | sudo bash
 ```
 
 If you're (understandably) concerned about piping a shell script from the internet into bash, you can instead clone the install repo and run it locally
