@@ -12,5 +12,5 @@ Optionally, agents can support:
 
 The following settings are expected to be available:
 * BeaconInterval: How many seconds between agent checkins
-* Jitter: Value that repressents the range of randomness to introduce. For example, a BeaconInterval of 10 seconds with a Jitter of 0.2 would mean the agent would pick a checkin time randomly between 8 and 12 seconds.
+* Jitter: Value that represents the range of randomness to introduce. For example, a BeaconInterval of 10 seconds with a Jitter of 0.2 would mean the agent would pick a checkin time randomly between 8 and 12 seconds.
 

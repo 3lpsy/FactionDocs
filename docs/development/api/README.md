@@ -1,5 +1,5 @@
 # Faction API
-Faction provides two ways to access its API, REST and SocketIO. REST leverages traditional HTTP verbs to perform actions against objects. SocketIO is a transport provided over Websockets to allow for real-time API access. It uses message types and JSON messages to perform actions.
+Faction provides two ways to access its API, REST and SocketIO. REST leverages traditional HTTP verbs to perform actions against objects. SocketIO is a transport provided over Web Sockets to allow for real-time API access. It uses message types and JSON messages to perform actions.
 
 ## Authentication
 No matter the API you're using you'll need an API key to authenticate. API keys consist of a key ID and a secret and they can be used in the following ways:
@@ -12,7 +12,7 @@ No matter the API you're using you'll need an API key to authenticate. API keys 
 ### Logging in with a username and password to get an API key.
 You can post your username and password to /api/v1/login/ to get a session token API key. Its important to note that this key will be invalidated the next time your username and password is used against this endpoint.
 
-::: 
+::: tip
 The login endpoint is the only endpoint in Faction that will accept a username and password for authentication. All other endpoints need to use an API key.
 :::
 
@@ -74,7 +74,7 @@ Updates an agent. Valid parameters are:
 Hides the given agent
 
 ## Agent Checkin
-This endpoint is used by Transports and Agents when they check in. It handles returning encrypted tasks for agents and recieveing encrypted task results from agents.
+This endpoint is used by Transports and Agents when they check in. It handles returning encrypted tasks for agents and receiving encrypted task results from agents.
 
 ### GET /agent/[agent_name]/checkin/
 Returns a JSON string containing the agent name and a base64 encoded list of [Agent Task Messages]

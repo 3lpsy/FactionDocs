@@ -2,7 +2,7 @@
 After installing Faction, you'll be presented with the URL, Admin Username, and Password for accessing the console. If you need to access this information later, it is stored in `/opt/faction/global/config.json`. 
 
 ## Transports
-The first thing you'll want to do is setup a transport. By default, Faction comes with one transport configured: DIRECT. This transport allows payloads to connect directly to Faction which is fine for testing, but not a great idea for an actual engagment.
+The first thing you'll want to do is setup a transport. By default, Faction comes with one transport configured: DIRECT. This transport allows payloads to connect directly to Faction which is fine for testing, but not a great idea for an actual engagement.
 
 Navigate to the Transports tab and click "New Transport". Provide a description for the Transport and you'll be given a Transport ID, Access Key Name, and Access Key Secret. The transport you're configuring should provide documentation on what to do with this information so that it can register with Faction. If you're using the HTTP Transport, you can find that information [here](https://github.com/FactionC2/TransportHTTP).
 
@@ -39,7 +39,7 @@ You can upload files on the "Files" tab, this is also where files that you uploa
 You can reference a file in a command with `f2:files/[filename]`. The API will automatically replace this string with the base64 encoded byte array of the given file. Commands like `download` will leverage this behavior to write files to disk.
 
 ## Creating Users
-Administrators can create new users for Faction from the settings page, located in the dropdown menu under your account name in the upper right. Users can have one of three different roles:
+Administrators can create new users for Faction from the settings page, located in the drop-down menu under your account name in the upper right. Users can have one of three different roles:
 
 * Administrator: Allows for the creation of new users
 * Operator: Allows for everything except the creation of users

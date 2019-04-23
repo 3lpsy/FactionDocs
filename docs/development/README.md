@@ -1,250 +1,105 @@
-# Developing with Faction
-The primary way to develop for Faction is by creating modules. Modules extend Faction agents with new functionality such as commands and transport methods. Modules are developed according to a "Faction Language Standard" which defines how commands and tranpsorts for a given programming language behave.
+# Getting Started
+Because Faction is a designed as a series of micro-services, configuring the development environment can be a little complicated. 
 
-### Faction Language Standards
-* [.NET](#net-faction-language-standard)
+An important thing to remember is that every service communicates over RabbitMQ and Postgres, so no matter what you're doing you'll need these services running. The easiest way to do this is through the Faction CLI's setup commands (detailed below). This design does mean that you can work on one service, while the others are running in a container as they would in production.
 
+## Setting up your development environment
+There are essentially two ways you can setup a Faction development environment. The first example will be a pure development environment that doesn't rely on any containerized services. The second will environment will be all containerized services, and then you'll selectively shutdown the services that you're developing.
 
-## .NET Faction Language Standard
-.NET modules leverage the [Faction.Modules.Dotnet.Common](https://github.com/FactionC2/Faction.Modules.Dotnet.Common) library to help make developing easier. This library provides objects to inhereit and edit for your needs.
+If you're not working on Faction itself, but instead are developing modules, agents, transports, etc. You'll probably want to use containerized services so that the environment you're working with is as close to production as possible. 
 
-Some general notes on building a Faction .NET module:
-* Modules main entry point should be in the `Faction.Modules.Dotnet` namespace
-* Modules must implement either a `GetCommands` or `GetTransports` method in the `Faction.Modules.Dotnet` namespace that returns a list of Command or Transport objects.
+### Clean Environment (No Containers)
+1. Clone the following repositories to your computer
+```
+git clone https://github.com/FactionC2/CLI
+git clone https://github.com/FactionC2/Core
+git clone https://github.com/FactionC2/API
+git clone https://github.com/FactionC2/Build-Service-Dotnet
+git clone https://github.com/FactionC2/Console
+```
+2. From the CLI directory, run `python setup.py install` to install the Faction CLI
+3. Setup Faction by running `faction setup --dev --external-address http://factionc2:5000`
+4. Setup will install just the RabbitMQ and PostgreSQL instances for Faction, it will then pause so you can apply the database schema
+5. Add the following entries to your hosts file
 
-### Commands
-.NET commands inhiert from the "Command" object. When a command is executed, it leverages the 'Execute' method of its command object. The 'Execute' command is passed a `Dictionary<string, string>` of parameters for the command. Details are how to register parameters are covered later in this document.
+```
+127.0.0.1 api
+127.0.0.1 factionc2
+127.0.0.1 db
+127.0.0.1 mq
+```
+5. From the Faction Core directory, run the following commands:
+```shell
+# This has to be done once, and then you only have to 
+# run this again if you change the database schema
+dotnet ef migrations add 'Initial' 
 
-The 'Execute' method of the command object is expected to return a 'CommandOutput' object. This object is provided by the common library and includes:
-
-* Complete: Boolean. Did the command complete?
-* Success: Boolean. Was the command successful?
-* Message: String. Output from the command. This will be displayed on the console.
-* Type: String. This is used to differentiate between command output types. Right now, Faction only recoginizes one type: 'File'. Everything else is assumed to be output from a regular command.
-* ContentId: String. Currently, this is only used for output that contains a file. The ID for this content is its file path.
-* Content: String. Currently, this is only used for output that contains a file. Content is the base64 encoded byte array of the file's contents.
-
-#### .NET Implementation Notes
-* Commands must be in the `Faction.Modules.Dotnet.Commands` namespace 
-* .NET modules use a file called `FactionModules.dotnet.json` for registration with the build server. More details on that are below.
-
-#### Examples
-
-Here is a simple example of implementing a 'Change Directory' command as a .NET command for Faction
-
-```CSharp
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Faction.Modules.Dotnet.Common;
-
-namespace Faction.Modules.Dotnet.Commands
-{
-  class ChangeDirectory : Command
-  {
-    public override string Name { get { return "cd"; } }
-    public override CommandOutput Execute(Dictionary<string, string> Parameters = null)
-    {
-      CommandOutput output = new CommandOutput();
-      try
-      {
-        string path = Parameters["Path"];
-        Directory.SetCurrentDirectory(path);
-        output.Complete = true;
-        output.Success = true;
-        output.Message = $"Current directory is now: {path}";
-
-      }
-      catch (Exception e)
-      {
-        output.Complete = true;
-        output.Success = false;
-        output.Message = e.Message;
-      }
-      return output;
-    }
-  }
-}
+# This applies the database schema to PostgreSQL
+dotnet ef database update 
+```
+6. Once the database schema has been applied, return to `faction setup` and press `enter` to resume setup
+7. From the Build-Service-Dotnet directory, run the following command to start the build server: `dotnet run`. The build server will start, and should import any agents and modules found in `/opt/faction/`
+8. From the Core directory, run the following command to start the Core service: `dotnet run`
+9. From the API directory, run the following commands to start the API service: 
+```shell
+pipenv install
+pipenv shell
+python app.py
+```
+10. From the Console directory, run the following commands to start the Console application:
+```
+npm install
+npm run dev
 ```
 
-Below is an example of an "Upload" command, demonstrating working with file content as part of a command.
+### Containerized Dev Environment
+1. Run through the normal [install process](/docs/#installing-faction)
+2. Clone any Faction services repos that you plan on working on.
+3. Stop the service that you'd like to develop for with: `docker stop <service_name>`, for example: `docker stop faction_core_1`.
+4. Start the service that you're working on as detailed above.
 
-```CSharp
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Faction.Modules.Dotnet.Common;
+## How Faction Builds Modules and Agents
+Modules and Agents leverage [Build Servers](/docs/components/#build-servers) to compile the artifacts that Faction is expecting. Build Servers by design are pretty simple, there are two things you need to be familiar with:
 
-namespace Faction.Modules.Dotnet.Commands
-{
-  class Upload : Command
-  {
-    public override string Name { get { return "upload"; } }
-    public override CommandOutput Execute(Dictionary<string, string> Parameters = null)
-    {
-      CommandOutput output = new CommandOutput();
-      
-      string path = Path.GetFullPath(Parameters["Path"]);
-      long length = new FileInfo(path).Length;
-      output.Complete = true;
+### Registration
+When a build server starts up, it searches for the following:
+* `FactionAgent.<language_name>.json` in `/opt/faction/agents/`
+* `FactionModule.<language_name>.json` in `/opt/faction/modules/<language_name>/`
 
-      // hard limit of 300mb for file uploads. Because of the b64 we have to do, this would inflate to like 500mb
-      if (length > 314572800)
-      {
-        output.Message = $"File size of {length} is over the 300mb limit of uploads.";
-        output.Success = false;
-      }
-      else
-      {
-        byte[] fileBytes = File.ReadAllBytes(path);
-        output.Success = true;
-        output.Message = $"{path} has been uploaded";
-        output.Type = "File";
-        output.Content = Convert.ToBase64String(fileBytes);
-        output.ContentId = path;
-      }
-      return output;
-    }
-  }
-}
-```
+For example, the .NET build server looks for `FactionAgent.dotnet.json` and `FactionModule.dotnet.json`.
 
-Faction's console is smart enough to render a list of objects in the CommandOutputs Message parameter as a table. To leverage this functionality, use Newtonsoft.Json (or another method) to render a list of objects to a json list. The example below uses a custom "FileResult" object and Newtonsoft.Json to return a list of files to Faction.
+These files provide the build server with all the information it needs to register the package with Faction. Details on these files can be found in the development sections for [Agents](/docs/development/agents/) and [Modules](/docs/development/modules/).
 
-```CSharp
-using System;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Faction.Modules.Dotnet.Common;
+:::tip
+Note that TRANSPORT MODULES are registered as part of the AGENT configuration. This may change in the future, but for now it makes sense that transport modules are agent specific.
+:::
 
-namespace Faction.Modules.Dotnet.Commands
-{
-  class F2File
-  {
-    public string Name;
-    public string Type;
-    public long? Length;
-    public DateTime LastAccessTime;
-    public DateTime LastWriteTime;
-  }
+### Building
+When a request comes in for a build server to build something, it references the `BuildCommand` and `BuildLocation` parameters from the configuration for the object. The `BuildCommand` tells Faction what command to run to build the artifact, the `BuildLocation` tells Faction where to pick up the artifact when its built.
 
-  class ListFiles : Command
-  {
-    public override string Name { get { return "ls"; } }
-    public override CommandOutput Execute(Dictionary<string, string> Parameters=null)
-    {
-      CommandOutput output = new CommandOutput();
-      string pwd = Directory.GetCurrentDirectory();
-      if (Parameters.ContainsKey("Path"))
-      {
-        pwd = Parameters["Path"];
-      }
-
-      try
-      {
-        string[] entries = Directory.GetFileSystemEntries(pwd);
-        List<F2File> results = new List<F2File>();
-
-        foreach (string entry in entries)
-        {
-          F2File f2File = new F2File();
-          FileAttributes attr = File.GetAttributes(entry);
-          if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
-          {
-            f2File.Type = "Directory";
-            f2File.Name = new DirectoryInfo(entry).Name;
-            f2File.Length = null;
-            f2File.LastAccessTime = Directory.GetLastAccessTimeUtc(entry);
-            f2File.LastWriteTime = Directory.GetLastWriteTime(entry);
-          }
-          else
-          {
-            f2File.Type = "File";
-            f2File.Name = Path.GetFileName(entry);
-            f2File.Length = new FileInfo(entry).Length;
-            f2File.LastAccessTime = File.GetLastAccessTimeUtc(entry);
-            f2File.LastWriteTime = File.GetLastWriteTimeUtc(entry);
-          }
-          results.Add(f2File);
-        }
-
-        output.Complete = true;
-        output.Success = true;
-        output.Message = JsonConvert.SerializeObject(results);
-      }
-      catch (Exception e)
-      {
-        output.Complete = true;
-        output.Success = false;
-        output.Message = e.Message; 
-      }
-      return output;
-    }
-  }
-}
-```
-
-### Registering Commands with Faction
-Build Servers will search `/opt/faction/modules/` for `FactionModule.[LANGUAGE].json` files. These files define what commands are available in your module and their associated parameters. To install your module, create this file in the root of your modules directory, and place that directory under `/opt/faction/modules`. When the associated build server is restarted, your module should be imported into Faction.
-
-An simple example of a `FactionModules.dotnet.json` file containing the 'cd' and 'upload' commands from above is below. A more complete FactionModule.dotnet.json file that demonstrates more options can be found [here](https://github.com/FactionC2/Modules-Dotnet/blob/master/StandardLibrary/FactionModule.dotnet.json).
+When a Faction Build Server runs a BuildCommand, it will provide the command with a path to a Build Configuration file. This file is json file looks like this:
 
 ```JSON
 {
-	"Name": "stdlib",
-	"Description": "Standard Library for Dotnet",
-	"Authors": [
-		"The Faction Team"
-	],
-	"Commands": [
-		{
-			"Name": "cd",
-			"Description": "Change the directory you're operating out of",
-			"Help": "You must include a path by either listing it after the command (`cd C:\\Foo`) or with the path parameter (`cd /path:C:\\Foo`)",
-			"OpsecSafe": "True",
-			"Parameters": [
-				{
-					"Name": "Path",
-					"Required": "True",
-					"Position": 0,
-					"Help": "The path to change to"
-				}
-			]
-		},
-		{
-			"Name": "ls",
-			"Description": "List the contents of a directory or path",
-			"Help": "You can include a path by either listing it after the command (ls C:\\Foo) or with the path parameter (ls /path:C:\\Foo)",
-			"OpsecSafe": "True",
-			"Parameters": [
-				{
-					"Name": "Path",
-					"Required": "False",
-					"Position": 0,
-					"Help": "The path to list"
-				}
-			]
-		},
-    {
-			"Name": "upload",
-			"Description": "Upload a file from an agent to Faction",
-			"Help": "Converts the specified file (using the Path parameter) to a base64 encoded string and sends it back to faction where it is converted back and written to disk. Note: There is a 300mb limit on files that can be uploaded to Faction.",
-			"OpsecSafe": "True",
-			"Parameters": [
-				{
-					"Name": "Path",
-					"Required": "True",
-					"Position": 0,
-					"Help": "Path to the file to upload to Faction."
-				}
-			]
-		}
-	],
-	"BuildLocation": "./Builds/Debug/stdlib.dll"
+  "PayloadName": "<staging key name>",
+  "PayloadKey": "<staging password>",
+  "InitialTransportType": "<initial transport module name>",
+  "TransportModule": "<base64 enccoded transport module>",
+  "BeaconInterval": <integer representing beacon period in seconds>,
+  "Jitter": <jitter value between 0.0 and 1.0>,
+  "ExpirationDate": "<ISO 8601 UTC Date>",
+  "Architecture": "<x86|x64>",
+  "OperatingSystem": "<Windows|MacOS|Linux>",
+  "Configuration": "<Agent provided configuration names>",
+  "Version": "<Language Version>",
+  "Debug": <true|false>,
+  "TransportConfiguration": "<configuration provided by transport server>"
 }
 ```
 
-### Implementation Notes
-* The BuildCommand is run on the Faction build server and is used to build the module. This is only required if your module should be rebuilt each time its loaded.
-* The BuildLocation parameter is used to tell faction where to find the module. If you specifiy a build command, the resulting file should end up at this location.
+So for example, if you provide a build command of `python build.py`, when the Build Server builds this object, it will execute `python build.py /tmp/tmpfilename` where `/tmp/tmpfilename` is the contents of the build configuration.
+
+An example of how to handle this can be found in Marauder's github repo:
+
+* [Marauder Build Script](https://github.com/maraudershell/Marauder/blob/master/build.py)
+* [Marauder DIRECT Transport Build Script](https://github.com/maraudershell/Marauder/blob/master/Transports/DIRECT/build.py)

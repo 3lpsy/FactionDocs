@@ -1,10 +1,10 @@
-## What is Faction
+# What is Faction
 Faction is a C2 framework for security professionals, providing an easy way to extend and interact with agents. It focuses on providing an easy, stable, and approachable platform for C2 communications through well documented REST and Socket.IO APIs.
 
 <iframe style="margin: 0 auto; text-align: center" width="560" height="315" src="https://www.youtube-nocookie.com/embed/gETAhgBJabI" frameborder="0" allowfullscreen></iframe>
 
-### What makes Faction special
-Faction was developed with a heavy focus on modularity, allowing it to be flexible enough to serve a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
+## What makes Faction special
+Faction was developed with a heavy focus on being modular, allowing it to be flexible enough to serve a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
 
 1. While the Faction team has released a [.NET agent](https://github.com/maraudershell/Marauder) for Faction, is not *THE* Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
 
@@ -14,7 +14,7 @@ Faction was developed with a heavy focus on modularity, allowing it to be flexib
 
 
 ## How Faction Works
-Instead of one large monolithic application, Faction is designed loosely around a micro services architecture. Functionality is split into seperate services that communicate through message queues. This approach provides several advantages, most important of which is allowing users to quickly be able to learn how the system operates. 
+Instead of one large monolithic application, Faction is designed loosely around a micro services architecture. Functionality is split into separate services that communicate through message queues. This approach provides several advantages, most important of which is allowing users to quickly be able to learn how the system operates. 
 
 Faction consists of four main services:
 
@@ -36,7 +36,7 @@ The easiest way to install Faction is with:
 curl https://raw.githubusercontent.com/FactionC2/Faction/master/install.sh | sudo bash
 ```
 
-If you're (understandably) concerned about piping a shell script from the internet into bash, you can instead clone the install repo and run it locally
+If you're (understandably) concerned about piping a shell script from the internet into bash, you can instead clone the install repository and run it locally
 
 ```
 git clone https://github.com/FactionC2/Faction/

@@ -5,15 +5,31 @@ module.exports = {
     nav: [
       { text: 'Documentation', link: '/docs/' },
       { text: 'Marauder Shell', link: 'https://github.com/maraudershell/Marauder'},
-      { text: 'Github', link: 'https://github.com/factionc2/'}
+      { text: 'Github', link: 'https://github.com/FactionC2/'}
     ],
     sidebar: [
-      ['/docs/', 'Documentation'],
-      '/docs/using/',
-      '/docs/development/',
-      '/docs/agents/',
-      '/docs/api/',
-      '/docs/components/',
+      {
+        title: 'Documentation',
+        collapsable: false,
+        children: [
+          '/docs/',
+          '/docs/using/',
+          '/docs/agents/',
+          '/docs/components/'
+        ]
+      },
+      {
+        title: 'Developing',
+        collapsable: false,
+        children: [
+          '/docs/development/',
+          ['/docs/development/agents/', 'Agents'],
+          ['/docs/development/modules/', 'Modules'],
+          ['/docs/development/transports/', 'Transports'],
+          '/docs/development/api/',
+          '/docs/development/schema/'
+        ]
+      }
     ],
     sidebarDepth: 2,
     lastUpdated: 'Last Updated',
