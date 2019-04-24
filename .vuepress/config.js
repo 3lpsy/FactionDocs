@@ -16,7 +16,8 @@ module.exports = {
           '/docs/using/',
           '/docs/agents/',
           '/docs/components/',
-          '/docs/concepts/'
+          '/docs/concepts/',
+          '/docs/help/'
         ]
       },
       {
