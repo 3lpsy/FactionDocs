@@ -51,6 +51,12 @@ Once the install has finished, you'll be able to use the `faction` command to in
 |--external-address | This is the address that you'll use to access Faction. By default, the external IP for the computer will be used over SSL (https://[external ip address]) |
 |--admin-password | By default, a random password will be generated for the Admin account. |
 
+If you need to the admin password after install, you can find it in `/opt/faction/global/config.json`
+
+:::tip
+Note that the config file only stores the password that was set during installation. It does not get updated if you change the admin password.
+:::
+
 ## Next Steps
 Once your install has finished, you can log into Faction at the address displayed at the end of installation (Default is https://[external ip address]) using the username and password provided.
 

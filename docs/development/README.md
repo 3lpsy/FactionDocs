@@ -103,3 +103,6 @@ An example of how to handle this can be found in Marauder's github repo:
 
 * [Marauder Build Script](https://github.com/maraudershell/Marauder/blob/master/build.py)
 * [Marauder DIRECT Transport Build Script](https://github.com/maraudershell/Marauder/blob/master/Transports/DIRECT/build.py)
+
+## Accessing Postgres and RabbitMQ
+During install, a random password is created for Postgres and RabbitMQ. You can find these passwords in the Faction config file at `/opt/faction/global/config.json`
