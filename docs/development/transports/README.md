@@ -2,7 +2,7 @@
 Transports consist of two parts, a transport server and a transport module.
 
 ## Transport Server
-A Transport Server sits between the Faction API and an agent. When a user creates a new Transport Server in Faction, they provide a name and in return get: a TransportId, API Key Name, and API Secret. Your transport server will use this information to interact with the Faction API. It is up to you to implement how you get this information from the user, but its probably easiest to tell them them to save it to some sort of config file that you'll read.
+A Transport Server sits between the Faction API and an agent. When a user creates a new Transport Server in Faction, they provide a name and in return get: a TransportId, API Key Name, and API Secret. Your transport server will use this information to interact with the Faction API. It is up to you to implement how you get this information from the user, but its probably easiest to tell them to save it to some sort of config file that you'll read.
 
 Transport servers interact with three APIs:
 
@@ -17,7 +17,7 @@ Transport servers interact with three APIs:
 When you post this information, the Checkin API will reply with a base64 encoded response (if there are any pending tasks for this agent). Your transport server is responsible for getting this base64 encoded string back to the agent.
 
 * `/api/v1/agent/<agent_name>/checkin/`: This is the endpoint that you will use for agent messaging. When an agent checks in, it will provide your transport server with its name and a base64 encoded message and its name. You will need to send this information to this endpoint as well as:
-  - TransportId: This is the ID of your Transport Server. This is provided to the user when then create a new transport server.
+  - TransportId: This is the ID of your Transport Server. This is provided to the user when they create a new transport server.
   - SourceIp: This is optional, but allows you to tell Faction where this request came from (as in, the external IP address of the agent).
 When you post this information, the Checkin API will reply with a base64 encoded response (if there are any pending tasks for this agent). Your transport server is responsible for getting this base64 encoded string back to the agent.
 
