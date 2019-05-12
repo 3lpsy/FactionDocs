@@ -40,6 +40,10 @@ module.exports = {
     // if your docs are in a specific branch (defaults to 'master'):
     docsBranch: 'master',
     // defaults to false, set to true to enable
-    editLinks: true
+    editLinks: true,
+    algolia: {
+      apiKey: '304c89097b2d18f07636b4193698648a',
+      indexName: 'factionc2'
+    }
   }
 }
