@@ -1,7 +1,7 @@
 # What is Faction
 Faction is a C2 framework for security professionals, providing an easy way to extend and interact with agents. It focuses on providing an easy, stable, and approachable platform for C2 communications through well documented REST and Socket.IO APIs.
 
-<iframe style="margin: 0 auto; text-align: center" width="560" height="315" src="https://www.youtube-nocookie.com/embed/gETAhgBJabI" frameborder="0" allowfullscreen></iframe>
+You can watch a demo of Faction [here](https://www.youtube.com/watch?v=gETAhgBJabI). Faction was released at Troopers 19, this presentation can be found [here](https://www.youtube.com/watch?v=NuAz6cfuEe4).
 
 ## What makes Faction special
 Faction was developed with a heavy focus on being modular, allowing it to be flexible enough to serve a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
