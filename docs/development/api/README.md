@@ -134,3 +134,33 @@ This endpoint is used for historical console information by task.
 
 ### GET
 Returns the console message information for a given agent task.
+
+## Transport
+Endpoint: `/api/v1/transport/[transport_id]`
+
+This endpoint is used to list, manage, and create [Transports](/docs/development/transports/)
+
+### GET
+If `transport_id` is specified, returns the Transport, else returns a list of all Transports
+
+### POST
+Used to create a new Transport (can not be used with a transport_id).
+
+|Parameter  | Description                                    |
+|-----------|------------------------------------------------|
+|Name       | User specified name of the transport           |
+
+### PUT
+Used to update a Transport (requires a transport_id). This endpoint is used by Transports to register with Faction and also to update existing Transports
+
+|Parameter  | Description                                    |
+|-----------|------------------------------------------------|
+|Name    | User specified name of the transport                   |
+|TransportType | This is the type of Transport being registered, for example the name of the Transport project (ex: Susan's super awesome carrier pigeon based transport) |
+|Guid | A GUID that is unique to the Transport type, not the transport instance. This GUID should be the same across all registered instances of your Transport Type |
+|Configuration | Configuration used to build the corresponding Transport Module. Things like what URL to connect to, details on how to obfuscate the traffic, etc |
+|Enabled | Whether the Transport is active or not |
+|Visible | Whether the Transport is visiable or not, if set to False then Enabled will also be set to False. |
+
+### DELETE
+Sets both visible and enabled on the specified transport_id to False.

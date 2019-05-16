@@ -9,7 +9,7 @@ Transport servers interact with three APIs:
 * `/api/v1/transport/`: This endpoint is used to register the transport server with Faction. When you register your transport with Faction, you'll provide:
   - TransportType: What is name of your transport? "HTTPTransport", "Jane's leet ICMP transport", whatever.
   - GUID: Your transport server will need a unique GUID. This is static, meaning that every instance of your transport server uses the same GUID. This GUID is used to associate your transport type with a transport module in the agent.
-  - Configuration: This is the configuration that will be used by the agent to communicate with your transport. You'll include things like URLs to connect to, as well as any other configuration options here.
+  - Configuration: This is the configuration that will be used by the agent to communicate with your transport. You'll include things like URLs to connect to, as well as any other configuration options here. When the [Transport Module](#transport-modules) for your Transport Server is created, this information will be passed to the build process for the Transport Module. Its recommended you specify this information in a JSON format since thats what everything else in Faction uses, but we're not the boss of you.
 
 * `/api/v1/staging/<staging_name>/<staging_id>/`: This is the endpoint that you will use for agent staging. When an agent stages, it will provide your transport server with its name and a base64 encoded message, a staging name, and a staging ID. You will need to send this information to this endpoint as well as:
   - TransportId: This is the ID of your Transport Server. This is provided to the user when then create a new transport server.
