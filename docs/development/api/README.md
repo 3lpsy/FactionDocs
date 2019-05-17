@@ -59,10 +59,10 @@ Endpoint: `/api/v1/agent/[agent_id]/`
 This endpoint is used to manage Faction agents. With the exception of GET, all methods require that `agent_id` be specified.
 
 #### GET
-If an agent_id is specified returns the agent, else returns a list of all agents.
+If an `agent_id` is specified returns the agent, else returns a list of all agents.
 
 #### PUT
-Updates an agent (agent_id required). Valid parameters are:
+Updates an agent (`agent_id` required). Valid parameters are:
 
 |Parameter  | Description                                    |
 |-----------|------------------------------------------------|
@@ -70,7 +70,7 @@ Updates an agent (agent_id required). Valid parameters are:
 |Visibility | Whether the agent is visible in Faction or not |
 
 #### DELETE
-Hides the given agent (requires an agent_id)
+Hides the given agent (requires an `agent_id`)
 
 ### Agent Staging
 Endpoint: `/api/v1/agent/[staging_name]/[staging_id]/`
@@ -109,7 +109,7 @@ Endpoint: `/api/v1/task/[task_id]/`
 Used to get agent tasks. If you need to create a new agent task, use the CONSOLE API endpoint.
 
 #### GET 
-If a task_id is specified returns the given task, else returns a list of all agent tasks
+If a `task_id` is specified returns the given task, else returns a list of all agent tasks
 
 
 ### Console Message (Agent)
@@ -144,14 +144,14 @@ This endpoint is used to list, manage, and create [Transports](/docs/development
 If `transport_id` is specified, returns the Transport, else returns a list of all Transports
 
 #### POST
-Used to create a new Transport (can not be used with a transport_id).
+Used to create a new Transport (can not be used with a `transport_id`).
 
 |Parameter  | Description                                    |
 |-----------|------------------------------------------------|
 |Name       | User specified name of the transport           |
 
 #### PUT
-Used to update a Transport (requires a transport_id). This endpoint is used to update existing Transports and by Transport Servers to register with Faction 
+Used to update a Transport (requires a `transport_id`). This endpoint is used to update existing Transports and by Transport Servers to register with Faction 
 
 |Parameter  | Description                                    |
 |-----------|------------------------------------------------|
@@ -163,4 +163,4 @@ Used to update a Transport (requires a transport_id). This endpoint is used to u
 |Visible | Whether the Transport is visiable or not, if set to False then Enabled will also be set to False. |
 
 #### DELETE
-Sets both visible and enabled on the specified transport_id to False.
+Sets both visible and enabled on the specified `transport_id` to False.
