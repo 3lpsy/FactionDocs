@@ -21,7 +21,7 @@ The API service provides access to all of Faction's features and serves as the a
 The Core service is responsible for handling all user and agent messages. One important thing to note about Factions design is that Core is the only service that decrypts agent messages. 
 
 ### Build Servers
-Build servers provide a build environment for a given programming language. This allows Faction to easily be extended to support modules and agents in new languages.
+Build servers provide a build environment for a given programming language. They're designed to be simple and unopionated, runing shell commands provided by build configs for [modules](/docs/development/modules/) and [agents](/docs/development/agents/). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages. 
 
 #### .NET Build Service
 The .NET build service  provides a Mono development environment that can be used to build .NET modules and agents.
