@@ -8,6 +8,16 @@ There are essentially two ways you can setup a Faction development environment. 
 
 If you're not working on Faction itself, but instead are developing modules, agents, transports, etc. You'll probably want to use containerized services so that the environment you're working with is as close to production as possible. 
 
+## Install development dependencies
+If doing development on an Ubuntu 18.04 LTS system, the following packages are required (for setup to complete):
+- python3, python3-dev, python3-setuptools, build-essential
+
+They can be installed via the following command:
+```
+sudo apt update
+sudo apt install python3 python3-dev python3-setuptools build-essential
+```
+
 ### Clean Environment (No Containers)
 1. Clone the following repositories to your computer
 ```
