@@ -27,7 +27,7 @@ git clone https://github.com/FactionC2/API
 git clone https://github.com/FactionC2/Build-Service-Dotnet
 git clone https://github.com/FactionC2/Console
 ```
-2. From the CLI directory, run `python setup.py install` to install the Faction CLI
+2. From the CLI directory, run `sudo python setup.py install` to install the Faction CLI
 3. Setup Faction by running `faction setup --dev --external-address http://factionc2:5000`
 4. Setup will install just the RabbitMQ and PostgreSQL instances for Faction, it will then pause so you can apply the database schema
 5. Add the following entries to your hosts file
