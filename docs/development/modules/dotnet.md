@@ -1,11 +1,16 @@
+# README
+
 ## .NET Faction Language Standard
+
 .NET modules leverage the [Faction.Modules.Dotnet.Common](https://github.com/FactionC2/Faction.Modules.Dotnet.Common) library to help make developing easier. This library provides objects to inherit and edit for your needs.
 
 Some general notes on building a Faction .NET module:
+
 * Modules must implement a `Initialization` class in the `Faction.Modules.Dotnet` namespace
 * The `Initialization` class must provide either a `GetCommands` or `GetTransports` method that returns a list of Command or Transport objects.
 
 ### Commands
+
 .NET commands inherit from the "Command" object. When a command is executed, it leverages the 'Execute' method of its command object. The 'Execute' command is passed a `Dictionary<string, string>` of parameters for the command. Details are how to register parameters are covered later in this document.
 
 The 'Execute' method of the command object is expected to return a 'CommandOutput' object. This object is provided by the common library and includes:
@@ -18,6 +23,7 @@ The 'Execute' method of the command object is expected to return a 'CommandOutpu
 * Content: String. Currently, this is only used for output that contains a file. Content is the base64 encoded byte array of the file's contents.
 
 #### .NET Implementation Notes
+
 * Commands must be in the `Faction.Modules.Dotnet.Commands` namespace 
 * .NET modules use a file called `FactionModules.dotnet.json` for registration with the build server. More details on that are below.
 
@@ -25,7 +31,7 @@ The 'Execute' method of the command object is expected to return a 'CommandOutpu
 
 Here is a simple example of implementing a 'Change Directory' command as a .NET command for Faction
 
-```CSharp
+```csharp
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -62,7 +68,7 @@ namespace Faction.Modules.Dotnet.Commands
 
 Below is an example of an "Upload" command, demonstrating working with file content as part of a command.
 
-```CSharp
+```csharp
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -76,7 +82,7 @@ namespace Faction.Modules.Dotnet.Commands
     public override CommandOutput Execute(Dictionary<string, string> Parameters = null)
     {
       CommandOutput output = new CommandOutput();
-      
+
       string path = Path.GetFullPath(Parameters["Path"]);
       long length = new FileInfo(path).Length;
       output.Complete = true;
@@ -102,9 +108,9 @@ namespace Faction.Modules.Dotnet.Commands
 }
 ```
 
-Faction's console is smart enough to render a list of objects in the CommandOutputs Message parameter as a table. To leverage this functionality, use Newtonsoft.Json (or another method) to render a list of objects to a json list. The example below uses a custom "FileResult" object and Newtonsoft.Json to return a list of files to Faction.
+Faction's console is smart enough to render a list of objects in the CommandOutputs Message parameter as a table. To leverage this functionality, use Newtonsoft.Json \(or another method\) to render a list of objects to a json list. The example below uses a custom "FileResult" object and Newtonsoft.Json to return a list of files to Faction.
 
-```CSharp
+```csharp
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -179,6 +185,7 @@ namespace Faction.Modules.Dotnet.Commands
 ```
 
 ## Transports
+
 Transport objects allow an agent to format its checkin's so that they can work with a given Transport Server. These transport objects inherit off the `AgentTransport` class provided by the `Faction.Modules.Dotnet.Common` library. To create a new transport object, you'll need to overwrite the following parameters and methods:
 
 * Name: This is the name of the TransportType that this transport object is used for
@@ -187,9 +194,7 @@ Transport objects allow an agent to format its checkin's so that they can work w
 
 The example below is taken from [Marauder's DIRECT Transport Module](https://github.com/maraudershell/Marauder/blob/master/Transports/DIRECT/DIRECT.cs).
 
-:::tip
-Because this module communicates directly with the API, it requires an API key. Normal modules would not require this, since they'd be communicating to a Transport server instead and the transport server will be communicating with the API on their behalf.
-:::
+:::tip Because this module communicates directly with the API, it requires an API key. Normal modules would not require this, since they'd be communicating to a Transport server instead and the transport server will be communicating with the API on their behalf. :::
 
 ```csharp
 using System;
@@ -298,5 +303,7 @@ namespace Faction.Modules.Dotnet
 ```
 
 ### Implementation Notes
+
 * The BuildCommand is run on the Faction build server and is used to build the module. This is only required if your module should be rebuilt each time its loaded.
 * The BuildLocation parameter is used to tell faction where to find the module. If you specify a build command, the resulting file should end up at this location.
+

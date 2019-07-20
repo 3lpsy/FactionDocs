@@ -1,20 +1,20 @@
 # What is Faction
+
 Faction is a C2 framework for security professionals, providing an easy way to extend and interact with agents. It focuses on providing an easy, stable, and approachable platform for C2 communications through well documented REST and Socket.IO APIs.
 
 You can watch a demo of Faction [here](https://www.youtube.com/watch?v=gETAhgBJabI). Faction was released at Troopers 19, this presentation can be found [here](https://www.youtube.com/watch?v=NuAz6cfuEe4).
 
 ## What makes Faction special
+
 Faction was developed with a heavy focus on being modular, allowing it to be flexible enough to serve a variety of needs. Because of this, there are few things about Faction that are different from a standard C2 platform.
 
-1. While the Faction team has released a [.NET agent](https://github.com/maraudershell/Marauder) for Faction, is not *THE* Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
-
+1. While the Faction team has released a [.NET agent](https://github.com/maraudershell/Marauder) for Faction, is not _THE_ Faction agent. Faction was designed to interact with any agent that speaks its language. This means that you can easily create your own agent for Faction either for your internal team or the world at large.
 2. You can create an entirely stand alone agent with all its functionality baked in, but agents greatly benefit when they can load Faction modules. These modules are stand alone libraries or code that bring new commands and features to an agent. An important aspect of Faction modules is that they are designed to be language specific, not agent specific. For example, any agent that can load the .NET runtime can leverage Faction's .NET modules.
-
-3. In most engagements, you're not going to have your agents connecting back directly to your C2. Faction was designed with redirects in mind in the form of Transport Servers. Transport Servers sit between Faction and your agent and handle masking your communications, and since Faction is all API based, these servers can be written in whatever language you're most comfortable in. 
-
+3. In most engagements, you're not going to have your agents connecting back directly to your C2. Faction was designed with redirects in mind in the form of Transport Servers. Transport Servers sit between Faction and your agent and handle masking your communications, and since Faction is all API based, these servers can be written in whatever language you're most comfortable in.
 
 ## How Faction Works
-Instead of one large monolithic application, Faction is designed loosely around a micro services architecture. Functionality is split into separate services that communicate through message queues. This approach provides several advantages, most important of which is allowing users to quickly be able to learn how the system operates. 
+
+Instead of one large monolithic application, Faction is designed loosely around a micro services architecture. Functionality is split into separate services that communicate through message queues. This approach provides several advantages, most important of which is allowing users to quickly be able to learn how the system operates.
 
 Faction consists of four main services:
 
@@ -26,38 +26,37 @@ Faction consists of four main services:
 In addition to these services, Faction also relies on RabbitMQ for communication between services and PostgreSQL for data storage.
 
 ## Installing Faction
-::: warning
-The Faction install script has only been tested on Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything.
-:::
+
+::: warning The Faction install script has only been tested on Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything. :::
 
 The easiest way to install Faction is with:
 
-```
+```text
 curl https://raw.githubusercontent.com/FactionC2/Faction/master/install.sh | sudo bash
 ```
 
-If you're (understandably) concerned about piping a shell script from the internet into bash, you can instead clone the install repository and run it locally
+If you're \(understandably\) concerned about piping a shell script from the internet into bash, you can instead clone the install repository and run it locally
 
-```
+```text
 git clone https://github.com/FactionC2/Faction/
 cd Faction
 sudo bash ./install.sh
 ```
 
-Once the install has finished, you'll be able to use the `faction` command to interact with your Faction install. The first thing you're going to want to do is run `sudo faction setup`. This command provides plenty of configuration options (including some that are totally unsupported), some of the relevant options are covered here. More details about the Faction CLI can be found [here](/docs/components/#CLI).
+Once the install has finished, you'll be able to use the `faction` command to interact with your Faction install. The first thing you're going to want to do is run `sudo faction setup`. This command provides plenty of configuration options \(including some that are totally unsupported\), some of the relevant options are covered here. More details about the Faction CLI can be found [here](components.md#CLI).
 
-|Parameter          | Description |
-|-------------------|-------------|
-|--external-address | This is the address that you'll use to access Faction. By default, the external IP for the computer will be used over SSL (https://[external ip address]) |
-|--admin-password | By default, a random password will be generated for the Admin account. |
+| Parameter | Description |
+| :--- | :--- |
+| --external-address | This is the address that you'll use to access Faction. By default, the external IP for the computer will be used over SSL \([https://\[external](https://[external) ip address\]\) |
+| --admin-password | By default, a random password will be generated for the Admin account. |
 
 If you need to the admin password after install, you can find it in `/opt/faction/global/config.json`
 
-:::tip
-Note that the config file only stores the password that was set during installation. It does not get updated if you change the admin password.
-:::
+:::tip Note that the config file only stores the password that was set during installation. It does not get updated if you change the admin password. :::
 
 ## Next Steps
-Once your install has finished, you can log into Faction at the address displayed at the end of installation (Default is https://[external ip address]) using the username and password provided.
 
-Further details on using Faction can be found in the [Using Faction](/docs/using/) section.
+Once your install has finished, you can log into Faction at the address displayed at the end of installation \(Default is [https://\[external](https://[external) ip address\]\) using the username and password provided.
+
+Further details on using Faction can be found in the [Using Faction](using.md) section.
+
