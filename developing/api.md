@@ -129,7 +129,7 @@ Create a new API key
 {% endapi-method-summary %}
 
 {% api-method-description %}
-
+This method allows you to create a new API key
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -372,14 +372,14 @@ Get Agent Task Messages
 {% endapi-method-summary %}
 
 {% api-method-description %}
-
+Returns a JSON string containing an base64 encoded, encrypted list of Agent Task Messages \(if any are avaiable\)
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="agent\_name" type="string" required=true %}
-The name of the agent that you're recieving tasks for
+The name of the agent that you're receiving tasks for
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 {% endapi-method-request %}
@@ -400,8 +400,6 @@ The name of the agent that you're recieving tasks for
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
-
-Returns a JSON string containing the agent name and a base64 encoded list of [Agent Task Messages](schema.md#agent-checkin)
 
 {% api-method method="post" host="https://faction\_url" path="/api/v1/agent/:agent\_name/checkin/" %}
 {% api-method-summary %}
@@ -454,7 +452,7 @@ The external IP address for the agent, else the IP of the transport is used. If 
 
 ## Agent Tasks
 
-Used to get agent tasks. If you need to create a new agent task, use the CONSOLE API endpoint.
+Used to get existing agent tasks. If you need to create a new agent task, use the [Console \(Agent\) API endpoint](api.md#console-message-agent).
 
 {% api-method method="get" host="https://faction\_api\_url" path="/api/v1/task/:task\_id/" %}
 {% api-method-summary %}
