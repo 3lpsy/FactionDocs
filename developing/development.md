@@ -14,7 +14,10 @@ If you're not working on Faction itself, but instead are developing modules, age
 
 If doing development on an Ubuntu 18.04 LTS system, the following packages are required \(for setup to complete\):
 
-* python3, python3-dev, python3-setuptools, build-essential
+* python3
+* python3-dev
+* python3-setuptools
+* build-essential
 
 They can be installed via the following command:
 
