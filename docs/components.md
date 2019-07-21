@@ -13,7 +13,9 @@ Faction consists of several services working together.
 
 The Console server acts as the public entry point to Faction. It provides access to both the Faction console as well as the internal API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
 
-::: tip It is _highly_ suggested that you restrict access to the console to your operatives and Transport services :::
+{% hint style="info" %}
+It is _highly_ suggested that you restrict access to the console to your operatives and Transport services
+{% endhint %}
 
 ### API
 
@@ -25,7 +27,7 @@ The Core service is responsible for handling all user and agent messages. One im
 
 ### Build Servers
 
-Build servers provide a build environment for a given programming language. They're designed to be simple and unopionated, runing shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
+Build servers provide a build environment for a given programming language. They're designed to be simple and unopionated, running shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
 
 #### .NET Build Service
 

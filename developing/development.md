@@ -1,12 +1,10 @@
 # Getting Started
 
-## 
-
 Because Faction is a designed as a series of micro-services, configuring the development environment can be a little complicated.
 
 An important thing to remember is that every service communicates over RabbitMQ and Postgres, so no matter what you're doing you'll need these services running. The easiest way to do this is through the Faction CLI's setup commands \(detailed below\). This design does mean that you can work on one service, while the others are running in a container as they would in production.
 
-### Setting up your development environment
+## Setting up your development environment
 
 There are essentially two ways you can setup a Faction development environment. The first example will be a pure development environment that doesn't rely on any containerized services. The second will environment will be all containerized services, and then you'll selectively shutdown the services that you're developing.
 
@@ -25,7 +23,7 @@ sudo apt update
 sudo apt install python3 python3-dev python3-setuptools build-essential
 ```
 
-#### Clean Environment \(No Containers\)
+### Clean Environment \(No Containers\)
 
 1. Clone the following repositories to your computer
 
@@ -51,24 +49,20 @@ sudo apt install python3 python3-dev python3-setuptools build-essential
 
 1. From the Faction Core directory, run the following commands:
 
-   \`\`\`shell
-
-   **This has to be done once, and then you only have to**
-
-   **run this again if you change the database schema**
-
-   dotnet ef migrations add 'Initial' 
-
-## This applies the database schema to PostgreSQL
-
+```text
+# This has to be done once, and then you only have to
+# run this again if you change the database schema
+dotnet ef migrations add 'Initial'
+# This applies the database schema to PostgreSQL
 dotnet ef database update
+```
+
+1. Once the database schema has been applied, return to `faction setup` and press `enter` to resume setup
+2. From the Build-Service-Dotnet directory, run the following command to start the build server: `dotnet run`. The build server will start, and should import any agents and modules found in `/opt/faction/`
+3. From the Core directory, run the following command to start the Core service: `dotnet run`
+4. From the API directory, run the following commands to start the API service: 
 
 ```text
-6. Once the database schema has been applied, return to `faction setup` and press `enter` to resume setup
-7. From the Build-Service-Dotnet directory, run the following command to start the build server: `dotnet run`. The build server will start, and should import any agents and modules found in `/opt/faction/`
-8. From the Core directory, run the following command to start the Core service: `dotnet run`
-9. From the API directory, run the following commands to start the API service: 
-```shell
 pipenv install
 pipenv shell
 python app.py
@@ -76,10 +70,10 @@ python app.py
 
 1. From the Console directory, run the following commands to start the Console application:
 
-   ```text
-   npm install
-   npm run dev
-   ```
+```text
+npm install
+npm run dev
+```
 
 #### Containerized Dev Environment
 
@@ -88,11 +82,11 @@ python app.py
 3. Stop the service that you'd like to develop for with: `docker stop <service_name>`, for example: `docker stop faction_core_1`.
 4. Start the service that you're working on as detailed above.
 
-### How Faction Builds Modules and Agents
+## How Faction Builds Modules and Agents
 
 Modules and Agents leverage [Build Servers](../docs/components.md#build-servers) to compile the artifacts that Faction is expecting. Build Servers by design are pretty simple, there are two things you need to be familiar with:
 
-#### Registration
+### Registration
 
 When a build server starts up, it searches for the following:
 
@@ -103,15 +97,17 @@ For example, the .NET build server looks for `FactionAgent.dotnet.json` and `Fac
 
 These files provide the build server with all the information it needs to register the package with Faction. Details on these files can be found in the development sections for [Agents](agents.md) and [Modules](modules/).
 
-:::tip Note that TRANSPORT MODULES are registered as part of the AGENT configuration. This may change in the future, but for now it makes sense that transport modules are agent specific. :::
+{% hint style="info" %}
+Note that TRANSPORT MODULES are registered as part of the AGENT configuration. This may change in the future, but for now it makes sense that transport modules are agent specific.
+{% endhint %}
 
-#### Building
+### Building
 
 When a request comes in for a build server to build something, it references the `BuildCommand` and `BuildLocation` parameters from the configuration for the object. The `BuildCommand` tells Faction what command to run to build the artifact, the `BuildLocation` tells Faction where to pick up the artifact when its built.
 
 When a Faction Build Server runs a BuildCommand, it will provide the command with a path to a Build Configuration file. This file is json file looks like this:
 
-```javascript
+```text
 {
   "PayloadName": "<staging key name>",
   "PayloadKey": "<staging password>",
@@ -136,7 +132,7 @@ An example of how to handle this can be found in Marauder's github repo:
 * [Marauder Build Script](https://github.com/maraudershell/Marauder/blob/master/build.py)
 * [Marauder DIRECT Transport Build Script](https://github.com/maraudershell/Marauder/blob/master/Transports/DIRECT/build.py)
 
-### Accessing Postgres and RabbitMQ
+## Accessing Postgres and RabbitMQ
 
 During install, a random password is created for Postgres and RabbitMQ. You can find these passwords in the Faction config file at `/opt/faction/global/config.json`
 

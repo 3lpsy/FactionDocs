@@ -1,6 +1,20 @@
 # Developing Transports
 
-Transports consist of two parts, a transport server and a transport module.
+## Faction Transports
+
+Transports allow you to change how Faction and its agents communicate with each other. They consist of two parts, a transport server which sits between Faction and the agent, and a transport module which is used by the agent to communicate with the server.
+
+The flow looks something like this: 
+
+1. Faction agent checks in, it passes a base64 encoded string to its transport module. 
+2. The module transforms this string into a message thats compatble with the transport.
+3. The module then sends this message to the transport
+4. The transport extracts the original base64 encoded string from this message
+5. The transport sends that base64 encoded string to the Faction Checkin API
+6. The API responds with a base64 encoded string meant for the agent
+7. The transport transforms this message into its defined format
+8. The transport then sends this transformed message to the agent
+9. The agent's transport module extracts the original base64 encoded string from the message and returns it to the agent
 
 ## Transport Server
 
@@ -8,20 +22,12 @@ A Transport Server sits between the Faction API and an agent. When a user create
 
 Transport servers interact with three APIs:
 
-* Transport \(`/api/v1/transport/`\): This endpoint is used to register the transport server with Faction. When you register your transport with Faction, you'll provide:
+* **Transport:** This endpoint is used to register the transport server with Faction. Full details on this endpoint can be found [here ](api.md#transports)but the gist is that when you register your transport with Faction, you'll provide:
   * TransportType: What is name of your transport? "HTTPTransport", "Jane's leet ICMP transport", whatever.
   * GUID: Your transport server will need a unique GUID. This is static, meaning that every instance of your transport server uses the same GUID. This GUID is used to associate your transport type with a transport module in the agent.
   * Configuration: This is the configuration that will be used by the agent to communicate with your transport. You'll include things like URLs to connect to, as well as any other configuration options here. When the [Transport Module](transports.md#transport-modules) for your Transport Server is created, this information will be passed to the build process for the Transport Module. Its recommended you specify this information in a JSON format since thats what everything else in Faction uses, but we're not the boss of you.
-* Agent Staging \(`/api/v1/staging/<staging_name>/<staging_id>/`\): This is the endpoint that you will use for agent staging. When an agent stages, it will provide your transport server with its name and a base64 encoded message, a staging name, and a staging ID. You will need to send this information to this endpoint as well as:
-  * TransportId: This is the ID of your Transport Server. This is provided to the user when then create a new transport server.
-  * SourceIp: This is optional, but allows you to tell Faction where this request came from \(as in, the external IP address of the agent\).
-
-    When you post this information, the Checkin API will reply with a base64 encoded response \(if there are any pending tasks for this agent\). Your transport server is responsible for getting this base64 encoded string back to the agent.
-* Agent Checkin \(`/api/v1/agent/<agent_name>/checkin/`O: This is the endpoint that you will use for agent messaging. When an agent checks in, it will provide your transport server with its name and a base64 encoded message and its name. You will need to send this information to this endpoint as well as:
-  * TransportId: This is the ID of your Transport Server. This is provided to the user when they create a new transport server.
-  * SourceIp: This is optional, but allows you to tell Faction where this request came from \(as in, the external IP address of the agent\).
-
-    When you post this information, the Checkin API will reply with a base64 encoded response \(if there are any pending tasks for this agent\). Your transport server is responsible for getting this base64 encoded string back to the agent.
+* **Agent Staging:** This is the endpoint that you will use for agent staging. When an agent stages, it will provide your transport server with its name and a base64 encoded message, a staging name, and a staging ID. You can find more details about this endpoint [here](agents.md#staging).
+* **Agent Checkin:** This is the endpoint that you will use for agent messaging. When an agent checks in, it will provide your transport server with its name and a base64 encoded message and its name. You can find more details about this endpoint [here](api.md#agent-checkins).
 
 More details on the Faction API can be found [here](api.md)
 

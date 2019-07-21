@@ -13,7 +13,9 @@ In addition to these services, Faction also relies on RabbitMQ for communication
 
 ## Installing Faction
 
-::: warning The Faction install script has only been tested on Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything. :::
+{% hint style="danger" %}
+The Faction install script has only been tested on Ubuntu 18.04.2. It might work on other versions of Ubuntu, but we're not promising anything.
+{% endhint %}
 
 The easiest way to install Faction is with:
 
@@ -33,16 +35,18 @@ Once the install has finished, you'll be able to use the `faction` command to in
 
 | Parameter | Description |
 | :--- | :--- |
-| --external-address | This is the address that you'll use to access Faction. By default, the external IP for the computer will be used over SSL \([https://\[external](https://[external) ip address\]\) |
+| --external-address | This is the address that you'll use to access Faction. By default, the external IP for the computer will be used over SSL \(\[[https://\[external\]\(https://\[external](https://[external]%28https://[external)\) ip address\]\) |
 | --admin-password | By default, a random password will be generated for the Admin account. |
 
 If you need to the admin password after install, you can find it in `/opt/faction/global/config.json`
 
-:::tip Note that the config file only stores the password that was set during installation. It does not get updated if you change the admin password. :::
+{% hint style="info" %}
+Note that the config file only stores the password that was set during installation. It does not get updated if you change the admin password
+{% endhint %}
 
 ## Next Steps
 
-Once your install has finished, you can log into Faction at the address displayed at the end of installation \(Default is [https://\[external](https://[external) ip address\]\) using the username and password provided.
+Once your install has finished, you can log into Faction at the address displayed at the end of installation \(Default is \[[https://\[external\]\(https://\[external](https://[external]%28https://[external)\) ip address\]\) using the username and password provided.
 
 Further details on using Faction can be found in the [Using Faction](using.md) section.
 

@@ -18,7 +18,7 @@ Staging occurs when a payload reaches out to the Faction API and tries to establ
 
 1. The payload sends a json message of host data, encrypted using the payload encryption password. This message looks like:
 
-   ```javascript
+   ```text
    {
    "StagingId": "A random string used to identify the staging message",
    "Username": "Username that the payload is running under",
@@ -49,7 +49,7 @@ The payload has now established an agent.
 
    Agent Tasks are downloading during an [agent checkin](api.md#agent-checkin), the tasks are sent as base64 encoded string. This message looks something like this:
 
-```javascript
+```text
 {
   "AgentName": "<agent name>",
   "Message": "<base64 encoded AES encrypted message>",
@@ -60,9 +60,9 @@ The payload has now established an agent.
 
 1. Decrypt the message.
 
-   Decrypting the message will result in a list of [agent tasks](schema.md#agent-task). 
+   Decrypting the message will result in a list of [agent tasks](schema.md#agent-task).
 
-```javascript
+```text
 {
   "Name": "<guid>",
   "Action": "The Type of task, either: RUN, LOAD, USE, or SET",
@@ -72,9 +72,9 @@ The payload has now established an agent.
 
 1. Process the task
 
-   After processing the task, an [Agent Task Update](schema.md#agent-task-update) is created, detailing the outcome of processing the task. 
+   After processing the task, an [Agent Task Update](schema.md#agent-task-update) is created, detailing the outcome of processing the task.
 
-```javascript
+```text
 {
   "TaskName": "<guid of task>",
   "Message": "Result of the task, for example command output, or a 'completed' message. This is printed to the console as part of the task update.",
@@ -85,7 +85,7 @@ The payload has now established an agent.
 
 1. Add the Task Update to a list, and encrypt it. At checkin, any pending task updates should be gathered into a list and the list encrypted using the agents password.
 
-   ```javascript
+   ```text
    {
    "AgentName": "<agent name>",
    "Message": "<base64 encoded AES encrypted message>",
@@ -102,7 +102,7 @@ Agents are registered by their languages build server. For more details on this 
 
 An example of a Marauder's `FactionAgent.dotnet.json` is below:
 
-```javascript
+```text
 {
   "Name": "Marauder",
   "Authors": [
