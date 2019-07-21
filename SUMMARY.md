@@ -13,7 +13,7 @@
 
 ## Developing
 
-* [Getting Started](developing/development.md)
+* [Getting Started](developing/getting-started.md)
 * [Developing Faction Modules](developing/modules/README.md)
   * [.NET Faction Language Standard](developing/modules/dotnet.md)
 * [Developing Transports](developing/transports.md)
