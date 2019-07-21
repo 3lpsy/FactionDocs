@@ -26,11 +26,11 @@ The login endpoint is the only endpoint in Faction that will accept a username a
 
 {% api-method method="post" host="https://faction\_api\_url" path="/api/v1/login/" %}
 {% api-method-summary %}
-
+Login to Faction
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Login to Faction, in response you'll get an API key to use for all other API requests.
+This method responds with a Session API key. This key will be revoked the next time you login.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -68,7 +68,7 @@ The password
 {% endapi-method %}
 
 {% hint style="warning" %}
-Whenever this endpoint is used, any previous Session API keys are invalided. Because of this you should not use the API key you receive from this endpoint in scripts or programs. Instead, create a new API key using the API key endpoint.
+Whenever this endpoint is used, any previous Session API keys are invalided. Because of this you should **not** use the API key you receive from this endpoint in scripts or programs. Instead, create a new API key using the API key endpoint. This API key should be used by users Faction client \(for example, the Faction Console\)
 {% endhint %}
 
 ## API Keys
