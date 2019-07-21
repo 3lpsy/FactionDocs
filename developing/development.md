@@ -47,7 +47,7 @@ sudo apt install python3 python3-dev python3-setuptools build-essential
 127.0.0.1 mq
 ```
 
-6. From the Faction Core directory, run the following commands:
+1. From the Faction Core directory, run the following commands:
 
 ```text
 # This has to be done once, and then you only have to
@@ -57,10 +57,10 @@ dotnet ef migrations add 'Initial'
 dotnet ef database update
 ```
 
-7. Once the database schema has been applied, return to `faction setup` and press `enter` to resume setup
-8. From the Build-Service-Dotnet directory, run the following command to start the build server: `dotnet run`. The build server will start, and should import any agents and modules found in `/opt/faction/`
-9. From the Core directory, run the following command to start the Core service: `dotnet run`
-10. From the API directory, run the following commands to start the API service: 
+1. Once the database schema has been applied, return to `faction setup` and press `enter` to resume setup
+2. From the Build-Service-Dotnet directory, run the following command to start the build server: `dotnet run`. The build server will start, and should import any agents and modules found in `/opt/faction/`
+3. From the Core directory, run the following command to start the Core service: `dotnet run`
+4. From the API directory, run the following commands to start the API service: 
 
 ```text
 pipenv install
@@ -68,14 +68,14 @@ pipenv shell
 python app.py
 ```
 
-11. From the Console directory, run the following commands to start the Console application:
+1. From the Console directory, run the following commands to start the Console application:
 
 ```text
 npm install
 npm run dev
 ```
 
-#### Containerized Dev Environment
+### Containerized Dev Environment
 
 1. Run through the normal [install process](../docs/docs.md#installing-faction)
 2. Clone any Faction services repos that you plan on working on.
