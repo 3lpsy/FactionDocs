@@ -22,8 +22,6 @@ To interact with Faction, you'll need an API key. To get an API key, use the Log
 The login endpoint is the only endpoint in Faction that will accept a username and password for authentication. All other endpoints need to use an API key.
 {% endhint %}
 
-{% api-method method="get" host="https://faction\_api\_url" path="/api/v1/login/" %}
-
 {% api-method method="post" host="https://faction\_api\_url" path="/api/v1/login/" %}
 {% api-method-summary %}
 Login to Faction
@@ -101,18 +99,11 @@ The User ID of the user you're getting API keys for
 {
     "Results": [
         {
-            "Created": "2019-06-21T03:07:59.963250",
-            "Id": 3,
-            "LastUsed": "2019-07-02T20:59:41.395348",
-            "Name": "PWjMrb2pi5qrzDbG",
-            "Type": "SessionToken"
-        },
-        {
-            "Created": "2019-07-02T20:21:25.972012",
-            "Id": 6,
-            "LastUsed": "2019-07-20T03:47:24.091207",
-            "Name": "73hYjPhTc-ve5gGn",
-            "Type": "Access"
+            "Created": "<ISO 8601 Date/Time>",
+            "Id": <API Key ID>,
+            "LastUsed": "<ISO 8601 Date/Time>",
+            "Name": "<API Key Name>",
+            "Type": "<API Key Type (SessionToken or Access)>"
         }
     ],
     "Success": true
@@ -226,6 +217,29 @@ The ID of the Agent
 {% endapi-method-response-example-description %}
 
 ```text
+{
+    "Admin": <Boolean>,
+    "AgentType": {
+        "Id": <Agent Type ID>,
+        "Name": "<Agent Type Name>"
+    },
+    "ExternalIP": "<External IP Address>",
+    "Hostname": "<Hostname>",
+    "Id": <Agent ID>,
+    "InitialCheckin": "<ISO 8601 Date/Time>",
+    "InternalIP": "INternal IP Address>,
+    "LastCheckin": "<ISO 8601 Date/Time>",
+    "Name": "<Agent Name>",
+    "OperatingSystem": "<Agent Operating System>",
+    "Pid": <Process ID>,
+    "Transport": {
+        "Id": <Transport ID>,
+        "Name": "<Transport Name>",
+        "TransportType": "<Transport Type>"
+    },
+    "Username": "<Username the Agent is running under>",
+    "Visible": <Boolean>
+}
 
 ```
 {% endapi-method-response-example %}
@@ -268,6 +282,29 @@ The name of the agent
 {% endapi-method-response-example-description %}
 
 ```text
+{
+    "Admin": <Boolean>,
+    "AgentType": {
+        "Id": <Agent Type ID>,
+        "Name": "<Agent Type Name>"
+    },
+    "ExternalIP": "<External IP Address>",
+    "Hostname": "<Hostname>",
+    "Id": <Agent ID>,
+    "InitialCheckin": "<ISO 8601 Date/Time>",
+    "InternalIP": "INternal IP Address>,
+    "LastCheckin": "<ISO 8601 Date/Time>",
+    "Name": "<Agent Name>",
+    "OperatingSystem": "<Agent Operating System>",
+    "Pid": <Process ID>,
+    "Transport": {
+        "Id": <Transport ID>,
+        "Name": "<Transport Name>",
+        "TransportType": "<Transport Type>"
+    },
+    "Username": "<Username the Agent is running under>",
+    "Visible": <Boolean>
+}
 
 ```
 {% endapi-method-response-example %}
@@ -300,7 +337,29 @@ The ID of the Agent
 {% endapi-method-response-example-description %}
 
 ```text
-
+{
+    "Admin": <Boolean>,
+    "AgentType": {
+        "Id": <Agent Type ID>,
+        "Name": "<Agent Type Name>"
+    },
+    "ExternalIP": "<External IP Address>",
+    "Hostname": "<Hostname>",
+    "Id": <Agent ID>,
+    "InitialCheckin": "<ISO 8601 Date/Time>",
+    "InternalIP": "INternal IP Address>,
+    "LastCheckin": "<ISO 8601 Date/Time>",
+    "Name": "<Agent Name>",
+    "OperatingSystem": "<Agent Operating System>",
+    "Pid": <Process ID>,
+    "Transport": {
+        "Id": <Transport ID>,
+        "Name": "<Transport Name>",
+        "TransportType": "<Transport Type>"
+    },
+    "Username": "<Username the Agent is running under>",
+    "Visible": false
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
