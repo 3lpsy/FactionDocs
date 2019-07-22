@@ -22,6 +22,35 @@ To interact with Faction, you'll need an API key. To get an API key, use the Log
 The login endpoint is the only endpoint in Faction that will accept a username and password for authentication. All other endpoints need to use an API key.
 {% endhint %}
 
+{% api-method method="get" host="https://faction\_api\_url" path="/api/v1/login/" %}
+{% api-method-summary %}
+Get Login Status
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+  "Message": "User is logged in",
+  "Success": true
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
 {% api-method method="post" host="https://faction\_api\_url" path="/api/v1/login/" %}
 {% api-method-summary %}
 Login to Faction
@@ -240,7 +269,6 @@ The ID of the Agent
     "Username": "<Username the Agent is running under>",
     "Visible": <Boolean>
 }
-
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -305,7 +333,6 @@ The name of the agent
     "Username": "<Username the Agent is running under>",
     "Visible": <Boolean>
 }
-
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
