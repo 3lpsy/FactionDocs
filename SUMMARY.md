@@ -4,7 +4,7 @@
 
 ## Documentation <a id="docs"></a>
 
-* [How Faction Works](docs/docs.md)
+* [Overview and Installation](docs/overview-and-installation.md)
 * [Using Faction](docs/using.md)
 * [Faction Components](docs/components.md)
 * [Faction Agents](docs/agents.md)

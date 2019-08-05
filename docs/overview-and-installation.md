@@ -1,4 +1,4 @@
-# How Faction Works
+# Overview and Installation
 
 Instead of one large monolithic application, Faction is designed loosely around a micro services architecture. Functionality is split into separate services that communicate through message queues. This approach provides several advantages, most important of which is allowing users to quickly be able to learn how the system operates.
 
