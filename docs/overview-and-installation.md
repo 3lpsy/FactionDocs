@@ -46,7 +46,7 @@ Note that the config file only stores the password that was set during installat
 
 ## Next Steps
 
-Once your install has finished, you can log into Faction at the address displayed at the end of installation \(Default is \[[https://\[external\]\(https://\[external](https://[external]%28https://[external)\) ip address\]\) using the username and password provided.
+Once your install has finished, you can log into Faction at the address displayed at the end of installation using the username and password provided.
 
 Further details on using Faction can be found in the [Using Faction](using.md) section.
 

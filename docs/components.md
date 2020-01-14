@@ -14,7 +14,7 @@ Faction consists of several services working together.
 The Console server acts as the public entry point to Faction. It provides access to both the Faction console as well as the internal API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
 
 {% hint style="info" %}
-It is _highly_ suggested that you restrict access to the console to your operatives and Transport services
+For opsec and security reasons, it is _**highly**_ ****suggested that you use firewall rules to restrict access to the Console/API so that only your operatives and transport servers can access these services. Especially in production, agents should be connecting through transport servers \(like the [HTTP Transport](https://github.com/FactionC2/TransportHTTP/)\) to call back to Faction.
 {% endhint %}
 
 ### API
