@@ -4,12 +4,12 @@ Instead of one large monolithic application, Faction is designed loosely around 
 
 Faction consists of four main services:
 
-* **Console**: The Faction console is a javascript application that interacts with the Faction API. It can be accessed with any modern browser and serves as the operational entry point to the system. 
+* **Console**: The Console service hosts a javascript application that interacts with the Faction API. It can be accessed with any modern browser and serves as the operational entry point to the system. 
 * **API**: The API is the how users, agents, and anything else interacts with Faction.
 * **Core**: The Core service handles all user and agent messaging, including processing user commands and handling encrypting/decrypting agent messages.
 * **Build Servers**: Build Servers handle building payloads and modules. They are language specific, allowing Faction to be easily extended to support new languages. Currently Faction supports .NET payloads and modules.
 
-In addition to these services, Faction also relies on RabbitMQ for communication between services and PostgreSQL for data storage. Further details about Faction services can be found on the [Faction Components page.](components.md)
+In addition to these services, Faction also relies on a RabbitMQ instance for communication between services and a PostgreSQL instance for data storage. Further details about Faction services can be found on the [Faction Components page.](components.md)
 
 ## Installing Faction
 
