@@ -15,7 +15,7 @@ The diagram below provides a high level overview of how the services interact wi
 
 ### Console
 
-The Console server acts as the public entry point to Faction. It handles hosting the console web application and provides access to the API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
+The Console serveris an Nginx instance that acts as the public entry point to Faction. It handles hosting the console web application and provides access to the API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
 
 {% hint style="info" %}
 For opsec and security reasons, it is _**highly**_ ****suggested that you use firewall rules to restrict access to the Console/API so that only your operatives and transport servers can access these services. Especially in production, agents should be connecting through transport servers \(like the [HTTP Transport](https://github.com/FactionC2/TransportHTTP/)\) to call back to Faction.
@@ -44,6 +44,16 @@ Build Services generate RabbitMQ messages that are consumed by the API service.
 #### .NET Build Service
 
 The .NET build service provides a Mono development environment that can be used to build .NET modules and agents.
+
+### Transport Servers
+
+Transport servers sit between the Faction API and agents, taking the place of redirectors in a typical C2 deployment. Together with a matching transport module in a Faction agent, they handle modifying or obfuscating API messages between Faction and the agent. An example of this is the HTTP transport server on the [Faction Github](https://github.com/FactionC2/TransportHTTP/), which allows users to easily craft HTTP traffic that hides Faction API messages on the wire and protects Faction from requests that don't match agent traffic.
+
+Transport servers don't have to use HTTP though, another example would be a transport server that handles communicating over DNS. The server would accept DNS requests, translate them to Faction API messages, and then translate the API response into a DNS response. The transport module in the client would handle taking the DNS response and extracting the original API message from it, and embedding messages into DNS requests.
+
+Its expected that transport servers reside on a separate server than Faction, so no transport servers are installed by default. Details on developing Transport Servers and modules can be [found here](../developing/transports.md).
+
+Transport Servers communicate with the Faction API over HTTP \(REST\) or Websockets \(Socket.IO\)
 
 ## CLI
 
