@@ -9,7 +9,7 @@ Faction consists of four main services:
 * **Core**: The Core service handles all user and agent messaging, including processing user commands and handling encrypting/decrypting agent messages.
 * **Build Servers**: Build Servers handle building payloads and modules. They are language specific, allowing Faction to be easily extended to support new languages. Currently Faction supports .NET payloads and modules.
 
-In addition to these services, Faction also relies on RabbitMQ for communication between services and PostgreSQL for data storage.
+In addition to these services, Faction also relies on RabbitMQ for communication between services and PostgreSQL for data storage. Further details about Faction services can be found on the [Faction Components page.](components.md)
 
 ## Installing Faction
 
