@@ -27,7 +27,7 @@ The console web application communicates directly with the API using a combinati
 
 The API service provides access to all of Faction's features and serves as the authentication layer for Faction. It provides both REST and Socket.IO based APIs. Further details on using the API can be found in the [API documentation](../developing/api.md)
 
-The API generates RabbitMQ messages that are consumed by the Core service
+The API service generates RabbitMQ messages that are consumed by the Core service
 
 ### Core
 
@@ -37,7 +37,7 @@ Core generates RabbitMQ messages that are consumed by the API service and any Bu
 
 ### Build Servers
 
-Build servers provide a build environment for a given programming language. They're designed to be simple and un-opionated, running shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
+Build servers provide a build environment for a given programming language. They're designed to be simple and unopinionated, running shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
 
 Build Services generate RabbitMQ messages that are consumed by the API service.
 
