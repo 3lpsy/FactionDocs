@@ -15,10 +15,10 @@ The diagram below provides a high level overview of how the services interact wi
 
 ### Console
 
-The Console serveris an Nginx instance that acts as the public entry point to Faction. It handles hosting the console web application and provides access to the API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
+The Console Service is an Nginx instance that acts as the public entry point to Faction. It handles hosting the console web application and provides access to the API service. Access to the console and API is provided over HTTPS, meaning that you only need to expose TCP port 443 to access Faction.
 
 {% hint style="info" %}
-For opsec and security reasons, it is _**highly**_ ****suggested that you use firewall rules to restrict access to the Console/API so that only your operatives and transport servers can access these services. Especially in production, agents should be connecting through transport servers \(like the [HTTP Transport](https://github.com/FactionC2/TransportHTTP/)\) to call back to Faction.
+For opsec and security reasons, it is _**highly**_ ****suggested that you use firewall rules to restrict access to the Console/API so that only your operatives and [transport servers](components.md#transport-servers) can access these services. Especially in production, agents should be connecting through transport servers \(like the [HTTP Transport](https://github.com/FactionC2/TransportHTTP/)\) to call back to Faction.
 {% endhint %}
 
 The console web application communicates directly with the API using a combination of HTTP and Websockets
@@ -26,6 +26,8 @@ The console web application communicates directly with the API using a combinati
 ### API
 
 The API service provides access to all of Faction's features and serves as the authentication layer for Faction. It provides both REST and Socket.IO based APIs. Further details on using the API can be found in the [API documentation](../developing/api.md)
+
+The web console, transport servers, and agents all act as API consumers. Its worth noting though that in production its expected that agents would not be accessing the API directly, but through a [transport server](components.md#transport-servers) instead.
 
 The API service generates RabbitMQ messages that are consumed by the Core service
 
