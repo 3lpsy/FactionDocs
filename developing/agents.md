@@ -98,7 +98,7 @@ The payload has now established an agent.
 
 ## Registering an Agent
 
-Agents are registered by their languages build server. For more details on this process, see the section on [How Faction Builds Modules and Agents]().
+Agents are registered by their languages build server. For more details on this process, see the section on [How Faction Builds Modules and Agents](agents.md).
 
 An example of a Marauder's `FactionAgent.dotnet.json` is below:
 

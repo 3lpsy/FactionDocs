@@ -11,7 +11,7 @@ Faction consists of several services that communicate with each other through Ra
 
 The diagram below provides a high level overview of how the services interact with each other.
 
-![](../.gitbook/assets/faction-diagram-03.png)
+![](../.gitbook/assets/faction-diagram-04.png)
 
 ### Console
 
