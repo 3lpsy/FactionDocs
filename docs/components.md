@@ -7,7 +7,7 @@ Here you'll find a break down of various components within Faction
 
 ## Services
 
-Faction consists of several services that communicate with each other through RabbitMQ and share data through PostgreSQL. This design allows individual services to easily be modified or new services added without effecting the rest the operation of the framework.
+Faction consists of several services that communicate with each other through RabbitMQ and share data through PostgreSQL. This design allows individual services to easily be modified or new services added without effecting the operation of the rest of the framework.
 
 The diagram below provides a high level overview of how the services interact with each other.
 
