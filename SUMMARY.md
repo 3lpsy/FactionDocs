@@ -5,12 +5,11 @@
 ## Documentation <a id="docs"></a>
 
 * [Overview and Installation](docs/overview-and-installation.md)
-* [Using Faction](docs/using.md)
 * [Faction Components](docs/components.md)
+* [Using Faction](docs/using.md)
 * [Faction CLI](docs/cli.md)
-* [Faction Agents](docs/agents.md)
-* [Concepts and Terminology](docs/concepts.md)
 * [Getting Help](docs/help.md)
+* [Glossary](docs/concepts.md)
 
 ## Developing
 

@@ -1,6 +1,6 @@
 # Using Faction
 
-After installing Faction, you'll be presented with the URL, Admin Username, and Password for accessing the console. If you need to access this information later, it is stored in `/opt/faction/global/config.json`.
+After installing Faction, you'll be presented with the URL, Admin Username, and Password for accessing the console. If you need to access this information later, you can either run `faction credentials` on your server, or references the values stored in `/opt/faction/global/config.json`.
 
 ## Transports
 
@@ -35,7 +35,7 @@ On the Agents tab, click on an agent to interact with it. The console that you p
 
 Faction agents are extensible through modules that provide additional commands. To load a module, use the `load [module name]` command.
 
-See the [Faction Agents](agents.md) page for more details on agents.
+See the [Faction Agents]() page for more details on agents.
 
 ## Uploading Files
 
