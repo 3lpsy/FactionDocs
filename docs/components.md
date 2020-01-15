@@ -7,27 +7,39 @@ Here you'll find a break down of various components within Faction
 
 ## Services
 
-Faction consists of several services working together.
+Faction consists of several services that communicate with each other through RabbitMQ and share data through PostgreSQL. This design allows individual services to easily be modified or new services added without effecting the rest the operation of the framework.
+
+The diagram below provides a high level overview of how the services interact with each other.
+
+![](../.gitbook/assets/faction-diagram.png)
 
 ### Console
 
-The Console server acts as the public entry point to Faction. It provides access to both the Faction console as well as the internal API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
+The Console server acts as the public entry point to Faction. It handles hosting the console web application and provides access to the API service. Both the Faction console and API are accessed over HTTPS, meaning that you only need to expose TCP port 443.
 
 {% hint style="info" %}
 For opsec and security reasons, it is _**highly**_ ****suggested that you use firewall rules to restrict access to the Console/API so that only your operatives and transport servers can access these services. Especially in production, agents should be connecting through transport servers \(like the [HTTP Transport](https://github.com/FactionC2/TransportHTTP/)\) to call back to Faction.
 {% endhint %}
 
+The console web application communicates directly with the API using a combination of HTTP and Websockets
+
 ### API
 
 The API service provides access to all of Faction's features and serves as the authentication layer for Faction. It provides both REST and Socket.IO based APIs. Further details on using the API can be found in the [API documentation](../developing/api.md)
 
+The API generates RabbitMQ messages that are consumed by the Core service
+
 ### Core
 
-The Core service is responsible for handling all user and agent messages. One important thing to note about Factions design is that Core is the only service that decrypts agent messages.
+The Core service acts as the brains behind Faction. It is responsible for processing and responding to all user and agent messages. One important thing to note about Factions design is that Core is the only service that decrypts agent messages. 
+
+Core generates RabbitMQ messages that are consumed by the API service and any Build Services.
 
 ### Build Servers
 
-Build servers provide a build environment for a given programming language. They're designed to be simple and unopionated, running shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
+Build servers provide a build environment for a given programming language. They're designed to be simple and un-opionated, running shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
+
+Build Services generate RabbitMQ messages that are consumed by the API service.
 
 #### .NET Build Service
 
