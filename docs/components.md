@@ -11,7 +11,7 @@ Faction consists of several services that communicate with each other through Ra
 
 The diagram below provides a high level overview of how the services interact with each other.
 
-![](../.gitbook/assets/faction-diagram-04.png)
+![](../.gitbook/assets/faction-diagram-06.png)
 
 ### Console
 
@@ -41,11 +41,9 @@ Core generates RabbitMQ messages that are consumed by the API service and any Bu
 
 Build servers provide a build environment for a given programming language. They're designed to be simple and unopinionated, running shell commands provided by build configs for [modules](../developing/modules/) and [agents](../developing/agents.md). The idea behind this is to allow developers to control the build process in a way that makes sense to them and allows Faction to easily be extended to support modules and agents in new languages.
 
+A [.NET build server](https://github.com/FactionC2/Build-Service-Dotnet) is provided as part of the Faction install. This server provides a Mono development environment that can be used to build .NET modules and agents.
+
 Build Services generate RabbitMQ messages that are consumed by the API service.
-
-#### .NET Build Service
-
-The .NET build service provides a Mono development environment that can be used to build .NET modules and agents.
 
 ### Transport Servers
 
