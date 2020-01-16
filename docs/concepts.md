@@ -1,8 +1,4 @@
----
-description: Some terms used throughout the Faction documentation
----
-
-# Glossary
+# Concepts and Terminology
 
 * **Payload**: A file or command that is run on a target machine to establish an agent
 * **Agent**: An instance of an Agent Type that is registered and communicating with Faction.

@@ -1,6 +1,6 @@
 # Using Faction
 
-After installing Faction, you'll be presented with the URL, Admin Username, and Password for accessing the console. If you need to access this information later, you can either run `faction credentials` on your server, or references the values stored in `/opt/faction/global/config.json`.
+After installing Faction, you'll be presented with the URL, Admin Username, and Password for accessing the console. If you need to access this information later, you can either run `faction credentials` on your server, or reference the values stored in `/opt/faction/global/config.json`.
 
 ## Transports
 
@@ -26,16 +26,16 @@ On the Payloads tab, you have the option to create a new payload. The following 
 
 Once a Payload stages, it becomes an agent. Agents allow you to interact with the target system.
 
-On the Agents tab, click on an agent to interact with it. The console that you presented with allows you to interact with you agent. The following commands will help you get your bearings:
+On the Agents tab, click on an agent to interact with it. The console that you are presented with allows you to interact with you agent. The following commands will help you get your bearings:
 
 * `show modules`
 * `show commands`
 * `help`
 * `help [command name]`
 
-Faction agents are extensible through modules that provide additional commands. To load a module, use the `load [module name]` command.
+Faction agents are extensible through modules that provide additional commands. To load a module, use the `load [module name]` command. You can also use the `set` command to update agent settings. The format is `set setting_name:value`
 
-See the [Faction Agents]() page for more details on agents.
+See the [Faction Agents](../developing/agents.md) page for details on developing agents.
 
 ## Uploading Files
 
