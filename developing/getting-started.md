@@ -14,12 +14,12 @@ If you're not working on Faction itself, but instead are developing modules, age
 
 If doing development on an Ubuntu 18.04 LTS system, the following packages are required \(for setup to complete\):
 
-- python3
-- python3-dev
-- python3-pip
-- python3-setuptools
-- build-essential
-- pipenv
+* python3
+* python3-dev
+* python3-pip
+* python3-setuptools
+* build-essential
+* pipenv
 
 They can be installed via the following command:
 
@@ -152,8 +152,8 @@ Modules and Agents leverage [Build Servers](../docs/components.md#build-servers)
 
 When a build server starts up, it searches for the following:
 
-- `FactionAgent.<language_name>.json` in `/opt/faction/agents/`
-- `FactionModule.<language_name>.json` in `/opt/faction/modules/<language_name>/`
+* `FactionAgent.<language_name>.json` in `/opt/faction/agents/`
+* `FactionModule.<language_name>.json` in `/opt/faction/modules/<language_name>/`
 
 For example, the .NET build server looks for `FactionAgent.dotnet.json` and `FactionModule.dotnet.json`.
 
@@ -191,8 +191,8 @@ So for example, if you provide a build command of `python build.py`, when the Bu
 
 An example of how to handle this can be found in Marauder's github repo:
 
-- [Marauder Build Script](https://github.com/maraudershell/Marauder/blob/master/build.py)
-- [Marauder DIRECT Transport Build Script](https://github.com/maraudershell/Marauder/blob/master/Transports/DIRECT/build.py)
+* [Marauder Build Script](https://github.com/maraudershell/Marauder/blob/master/build.py)
+* [Marauder DIRECT Transport Build Script](https://github.com/maraudershell/Marauder/blob/master/Transports/DIRECT/build.py)
 
 ### Accessing Postgres and RabbitMQ
 
